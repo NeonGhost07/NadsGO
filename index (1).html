@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NADSGO — Cellular Fuel. Zero Crash.</title>
+<style>
+:root{--ink:#000;--ink2:#1d1d1f;--paper:#f5f5f7;--paper-ink:#1d1d1f;--paper-mute:#6e6e73;--mute:#a1a1a6;--acc:#d4ff2a;--acc-ink:#000;--card:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#0d0d0f;--paper-ink:#f5f5f7;--paper-mute:#a1a1a6;--card:#1a1a1d}}
+:root[data-theme="dark"]{--paper:#0d0d0f;--paper-ink:#f5f5f7;--paper-mute:#a1a1a6;--card:#1a1a1d}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:56px}
+body{background:var(--ink);color:#f5f5f7;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.4}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;height:48px;display:flex;align-items:center;justify-content:center;gap:clamp(16px,4vw,44px);background:rgba(0,0,0,.72);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);font-size:12px;color:#d2d2d7}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:rgba(0,0,0,.72);z-index:21;backdrop-filter:blur(20px)}
+nav b{font-size:15px;letter-spacing:.02em;color:#fff;margin-right:auto;margin-left:max(16px,calc(50% - 540px))}
+nav a:hover{color:#fff}
+nav .buy{background:var(--acc);color:#000;padding:5px 13px;border-radius:980px;font-weight:600;margin-right:max(16px,calc(50% - 540px))}
+@media(max-width:640px){nav .hide{display:none}}
+section{padding:clamp(72px,12vw,140px) 22px;text-align:center}
+.wrap{max-width:1040px;margin:0 auto}
+h1{font-size:clamp(52px,11vw,128px);line-height:.98;letter-spacing:-.045em;font-weight:700}
+h2{font-size:clamp(34px,6.4vw,76px);line-height:1.04;letter-spacing:-.035em;font-weight:700}
+h3{font-size:clamp(21px,2.4vw,28px);letter-spacing:-.02em;font-weight:600}
+.lede{font-size:clamp(19px,2.2vw,27px);color:var(--mute);max-width:640px;margin:22px auto 0;letter-spacing:-.01em}
+.btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-block;padding:13px 26px;border-radius:980px;font-size:17px;font-weight:500;background:var(--acc);color:var(--acc-ink);transition:transform .2s}
+.btn:hover{transform:scale(1.03)}
+.btn.ghost{background:transparent;color:var(--acc);padding-inline:6px}
+.btn.ghost:hover{text-decoration:underline;transform:none}
+
+/* hero */
+.hero{padding-bottom:0;background:radial-gradient(60% 50% at 50% 78%,color-mix(in srgb,var(--acc) 22%,transparent),transparent 70%),#000;overflow:hidden;transition:background .5s}
+.stage{position:relative;height:clamp(380px,62vw,620px);margin-top:36px;display:flex;justify-content:center;align-items:flex-end}
+.can{--w:clamp(130px,19vw,210px);width:var(--w);height:calc(var(--w)*2.55);border-radius:calc(var(--w)*.2) calc(var(--w)*.2) calc(var(--w)*.14) calc(var(--w)*.14);position:relative;background:linear-gradient(90deg,#050505 0%,#1d1d20 22%,#2a2a2e 34%,#121214 55%,#050505 100%);box-shadow:0 40px 90px -20px color-mix(in srgb,var(--acc) 45%,transparent),inset 0 0 0 1px rgba(255,255,255,.06);animation:rise 1.2s cubic-bezier(.2,.8,.2,1) both;overflow:hidden}
+.can::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 18%,rgba(255,255,255,.16) 27%,transparent 36%,transparent 82%,rgba(255,255,255,.05) 90%,transparent)}
+.can::after{content:"";position:absolute;left:0;right:0;top:0;height:6%;background:linear-gradient(#8a8a90,#3b3b40);opacity:.55}
+.can .band{position:absolute;left:0;right:0;top:24%;height:4px;background:var(--acc);box-shadow:0 0 18px var(--acc);transition:background .4s,box-shadow .4s}
+.can .name{position:absolute;left:0;right:0;top:32%;text-align:center;font-weight:800;font-size:calc(var(--w)*.17);letter-spacing:-.03em;color:#fff}
+.can .sub{position:absolute;left:0;right:0;top:46%;text-align:center;font-size:calc(var(--w)*.06);color:var(--acc);font-weight:600;transition:color .4s}
+.can .nad{position:absolute;left:50%;bottom:12%;transform:translateX(-50%);font-size:calc(var(--w)*.055);color:#8e8e93;text-align:center;line-height:1.5}
+.can.side{position:absolute;opacity:.55;transform:scale(.78);filter:blur(1px)}
+.can.l{left:calc(50% - var(--w)*1.55);animation-delay:.15s;transform-origin:bottom}
+.can.r{left:calc(50% + var(--w)*.55);animation-delay:.3s;transform-origin:bottom}
+@media(max-width:640px){.can.side{display:none}}
+@keyframes rise{from{opacity:0;transform:translateY(60px)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* light sections */
+.paper{background:var(--paper);color:var(--paper-ink)}
+.paper .lede{color:var(--paper-mute)}
+
+/* ingredients */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:56px;text-align:left}
+.tile{background:var(--card);border-radius:28px;padding:34px 30px;min-height:240px;display:flex;flex-direction:column;justify-content:space-between}
+.tile .big{font-size:clamp(56px,7vw,84px);font-weight:700;letter-spacing:-.05em;line-height:1}
+.tile .big small{font-size:.32em;letter-spacing:0;color:var(--paper-mute);font-weight:600;margin-left:4px}
+.tile p{color:var(--paper-mute);margin-top:8px;font-size:17px}
+.tile.wide{grid-column:1/-1;background:#000;color:#fff;flex-direction:row;align-items:center;gap:30px;flex-wrap:wrap}
+.tile.wide p{color:#a1a1a6;max-width:420px}
+.tile.wide .big{color:var(--acc)}
+
+/* flavors */
+.flav{background:#000}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:44px}
+.tabs button{font:inherit;font-size:15px;color:#d2d2d7;background:#1d1d1f;border:0;padding:10px 20px;border-radius:980px;cursor:pointer;transition:background .2s,color .2s}
+.tabs button[aria-pressed="true"]{background:#f5f5f7;color:#000}
+.fl{margin-top:44px;display:flex;align-items:center;justify-content:center;gap:clamp(24px,6vw,80px);flex-wrap:wrap}
+.fl .can{--w:150px;animation:none}
+.fl .txt{max-width:360px;text-align:left}
+.fl .txt h3{font-size:clamp(28px,4vw,44px);color:var(--acc);transition:color .4s}
+.fl .txt p{color:var(--mute);margin-top:10px;font-size:19px}
+
+/* numbers */
+.nums{display:flex;gap:clamp(20px,6vw,80px);justify-content:center;flex-wrap:wrap;margin-top:54px}
+.nums div{min-width:130px}
+.nums b{display:block;font-size:clamp(54px,8vw,96px);letter-spacing:-.05em;line-height:1;font-weight:700}
+.nums span{color:var(--paper-mute);font-size:17px}
+
+/* who */
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:40px;margin-top:54px;text-align:left}
+.cols p{color:var(--mute);margin-top:10px;font-size:17px}
+
+/* subscribe */
+.sub-sec{background:radial-gradient(70% 70% at 50% 100%,color-mix(in srgb,var(--acc) 20%,transparent),transparent),#000}
+.price{font-size:clamp(64px,10vw,120px);font-weight:700;letter-spacing:-.05em;margin-top:30px}
+.price small{font-size:.24em;color:var(--mute);letter-spacing:0;font-weight:500}
+.fine{color:var(--mute);font-size:14px;margin-top:14px}
+footer{background:#000;color:#6e6e73;font-size:12px;padding:30px 22px calc(30px + env(safe-area-inset-bottom,0px));text-align:center;border-top:1px solid #1d1d1f}
+/* can v2: slim aluminum can with neck, rim and vertical wordmark */
+.can{border-radius:0;box-shadow:none;height:calc(var(--w)*3.1);clip-path:polygon(14% 0,86% 0,88% 2.2%,93% 5%,100% 9%,100% 97.5%,96% 100%,4% 100%,0 97.5%,0 9%,7% 5%,12% 2.2%);background:linear-gradient(#0000 96.8%,#7a7a80 96.8%),linear-gradient(90deg,#08080a 0%,#222226 20%,#34343a 30%,#141416 52%,#09090a 80%,#1b1b1e 94%,#060607 100%)}
+.can::before{background:linear-gradient(90deg,transparent 16%,rgba(255,255,255,.22) 25%,transparent 33%,transparent 84%,rgba(255,255,255,.07) 91%,transparent)}
+.can::after{height:9%;background:radial-gradient(ellipse 30% 22% at 50% 30%,#2b2b2f 0 60%,transparent 62%),linear-gradient(90deg,#55555a,#d9d9de 30%,#8d8d93 55%,#c4c4c9 80%,#55555a);opacity:1}
+.can .band{top:60%;height:15%;transform:skewY(-14deg);background:linear-gradient(90deg,transparent,var(--acc) 12%,var(--acc) 88%,transparent);box-shadow:0 0 26px var(--acc)}
+.can .name{left:50%;right:auto;top:15%;transform:translateX(-50%) rotate(180deg);writing-mode:vertical-rl;font-size:calc(var(--w)*.22);line-height:1;letter-spacing:.04em;font-weight:800}
+.can .sub{top:80%;font-size:calc(var(--w)*.065);padding:0 8%}
+.can .nad{bottom:6%}
+.fl .can{--w:130px}
+.fl{background:radial-gradient(40% 60% at 35% 50%,color-mix(in srgb,var(--acc) 16%,transparent),transparent 70%)}
+.stage{height:clamp(420px,66vw,680px)}
+/* can v4: fat cylindrical shape */
+.can{--w:clamp(150px,22vw,240px);height:calc(var(--w)*2);clip-path:polygon(6% 0,94% 0,96% 1.4%,100% 5%,100% 98%,96% 100%,4% 100%,0 98%,0 5%,4% 1.4%)}
+.can::after{height:7%}
+.can .name{top:12%;font-size:calc(var(--w)*.15)}
+.can .band{top:62%}
+.can .sub{top:78%}
+.fl .can{--w:170px}
+.stage{height:clamp(360px,56vw,560px)}
+/* can v5: flavor label on the neon strip */
+.can .band{top:66%;height:11%;transform:none;background:var(--acc)}
+.can .sub{top:66%;height:11%;display:flex;align-items:center;justify-content:center;padding:0 6%;color:#000;font-weight:800;font-size:calc(var(--w)*.075);white-space:nowrap}
+/* can v6: strip upside down */
+.can .band,.can .sub{transform:rotate(180deg)}
+/* can v7: slanted strip as before, label on it */
+.can .band{top:60%;height:15%;transform:skewY(-14deg);background:linear-gradient(90deg,transparent,var(--acc) 12%,var(--acc) 88%,transparent);box-shadow:0 0 26px var(--acc)}
+.can .sub{top:60%;height:15%;transform:rotate(-14deg)}
+/* can v8: wavy neon strip */
+.can .band{top:56%;height:24%;transform:none;box-shadow:none;background:var(--acc);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 44' preserveAspectRatio='none'%3E%3Cpath d='M0 14Q12.5 2 25 14Q37.5 26 50 14Q62.5 2 75 14Q87.5 26 100 14L100 30Q87.5 42 75 30Q62.5 18 50 30Q37.5 42 25 30Q12.5 18 0 30Z'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 44' preserveAspectRatio='none'%3E%3Cpath d='M0 14Q12.5 2 25 14Q37.5 26 50 14Q62.5 2 75 14Q87.5 26 100 14L100 30Q87.5 42 75 30Q62.5 18 50 30Q37.5 42 25 30Q12.5 18 0 30Z'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat}
+.can .sub{top:56%;height:24%;transform:none;font-size:calc(var(--w)*.065)}
+/* can v9: flavor label below the wave */
+.can .name{font-size:calc(var(--w)*.13)}
+.can .band{top:53%;height:22%}
+.can .sub{top:77%;height:8%;color:var(--acc);font-weight:700;font-size:calc(var(--w)*.075)}
+.can .nad{bottom:4%}
+/* click-to-shuffle */
+.stage{--sx:1.05;cursor:pointer;margin-top:10px;-webkit-tap-highlight-color:transparent}
+.hint{color:#8e8e93;font-size:14px;margin-top:28px}
+.stage .can[data-s]{position:absolute;bottom:0;left:50%;margin-left:calc(var(--w)/-2);display:block;transition:transform .6s cubic-bezier(.34,1.35,.64,1),opacity .4s,filter .4s}
+.stage .can[data-s="0"]{z-index:3;opacity:1;filter:none;transform:scale(1)}
+.stage .can[data-s="1"]{z-index:1;opacity:.65;filter:blur(1px);transform:translateX(calc(var(--w)*var(--sx)*-1)) scale(.78)}
+.stage .can[data-s="2"]{z-index:1;opacity:.65;filter:blur(1px);transform:translateX(calc(var(--w)*var(--sx))) scale(.78)}
+.stage.stack .can[data-s]{z-index:2;opacity:1;filter:none;transform:translateY(-18px) rotate(var(--r)) scale(.9)}
+@media(max-width:640px){.stage{--sx:.72}}
+/* realistic shuffle: ground shadows, no CSS transition while animating */
+.stage .can{transform-origin:50% 100%}
+.stage.anim .can[data-s]{transition:none}
+.sh{position:absolute;bottom:-8px;left:50%;height:26px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(0,0,0,.75),transparent 70%);z-index:0;pointer-events:none}
+/* card fade-in on scroll */
+.js .rv{opacity:0;transform:translateY(28px) scale(.97);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+/* fixes: room for the can shadows */
+.hero{padding-bottom:34px}
+</style>
+</head>
+<body>
+<nav>
+  <b>NADSGO</b>
+  <a class="hide" href="#science">Science</a>
+  <a class="hide" href="#flavors">Flavors</a>
+  <a class="hide" href="#numbers">Nutrition</a>
+  <a class="buy" href="subscribe.html">Subscribe</a>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Cellular fuel.<br>Zero crash.</h1>
+    <p class="lede">The energy drink built on NMN, CoQ10 and 200 mg of green tea caffeine. Clean focus, no jitters, no sugar.</p>
+    <div class="btns"><a class="btn" href="subscribe.html">Subscribe, $39.99 a case</a><a class="btn ghost" href="#science">See what's inside ›</a></div>
+  </div>
+  <div class="stage" id="stage" role="button" tabindex="0" aria-label="Shuffle the cans">
+    <div class="can side l"><i class="band"></i><div class="name">NADSGO</div><div class="sub">Cyber Berry</div></div>
+    <div class="can"><i class="band"></i><div class="name">NADSGO</div><div class="sub">Voltage Citrus</div><div class="nad">NMN · CoQ10<br>355 ml</div></div>
+    <div class="can side r"><i class="band"></i><div class="name">NADSGO</div><div class="sub">Ghost Grapefruit</div></div>
+  </div>
+</section>
+
+<section class="paper" id="science">
+  <div class="wrap">
+    <h2>Power the part of you<br>that makes power.</h2>
+    <p class="lede">Most energy drinks push your heart. NADSGO feeds your mitochondria, the cell's power plants, so energy lasts without the fall.</p>
+    <div class="grid">
+      <div class="tile"><div class="big">250<small>mg</small></div><div><h3>NMN</h3><p>A direct precursor to NAD+, the molecule your cells use to make energy.</p></div></div>
+      <div class="tile"><div class="big">200<small>mg</small></div><div><h3>Green tea caffeine</h3><p>Smooth, steady alertness from a natural source, not a synthetic spike.</p></div></div>
+      <div class="tile"><div class="big">200<small>mg</small></div><div><h3>L-Theanine</h3><p>Calms the edge of caffeine so you stay sharp without the jitters.</p></div></div>
+      <div class="tile"><div class="big">300<small>mg</small></div><div><h3>Alpha-GPC</h3><p>A high-potency choline source for memory and mental speed.</p></div></div>
+      <div class="tile"><div class="big">100<small>mg</small></div><div><h3>CoQ10</h3><p>A cellular antioxidant that supports ATP production.</p></div></div>
+      <div class="tile"><div class="big">100%<small>DV</small></div><div><h3>B3, B6 and B12</h3><p>Cofactors your body needs to turn food into usable energy.</p></div></div>
+      <div class="tile wide"><div class="big">0 g sugar</div><p>10 calories. Gluten-free, keto-friendly and 100% naturally flavored. Nothing to make up for.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="flav" id="flavors">
+  <div class="wrap">
+    <h2>Four flavors.<br>One clean charge.</h2>
+    <div class="tabs" role="group" aria-label="Choose a flavor" id="tabs"></div>
+    <div class="fl">
+      <div class="can" aria-hidden="true"><i class="band"></i><div class="name">NADSGO</div><div class="sub" id="fsub"></div></div>
+      <div class="txt"><h3 id="fname"></h3><p id="fdesc"></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="paper" id="numbers">
+  <div class="wrap">
+    <h2>Everything you need.<br>Nothing you don't.</h2>
+    <div class="nums">
+      <div><b>0g</b><span>sugar</span></div>
+      <div><b>10</b><span>calories</span></div>
+      <div><b>200mg</b><span>natural caffeine</span></div>
+      <div><b>355ml</b><span>slim can</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Made for people<br>who do the work.</h2>
+    <div class="cols">
+      <div><h3>Biohackers and athletes</h3><p>Track your sleep, your training and your stack. Add a drink that fits it.</p></div>
+      <div><h3>Gamers and tech workers</h3><p>Hold focus through long sessions and late deploys without a 3 p.m. cliff.</p></div>
+      <div><h3>Students and creators</h3><p>A premium alternative to legacy energy drinks, in a can worth putting in the shot.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sub-sec" id="subscribe">
+  <div class="wrap">
+    <h2>Stock your fridge.<br>Skip the store run.</h2>
+    <p class="lede">A 12-pack delivered every month. Pick your flavors, pause or cancel any time.</p>
+    <div class="price">$39.99<small> / 12 cans</small></div>
+    <p class="fine">That's $3.33 a can, versus $3.99 at retail.</p>
+    <div class="btns"><a class="btn" href="subscribe.html">Start my subscription</a><a class="btn ghost" href="subscribe.html">Buy one case ›</a></div>
+  </div>
+</section>
+
+<footer>NADSGO Energy Drink. Cellular Fuel. Zero Crash. These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure or prevent any disease.</footer>
+
+<script>
+var F=[
+ {n:"Voltage Citrus",d:"Yuzu and electric lime. Bright, sharp and our most popular flavor.",c:"#d4ff2a"},
+ {n:"Cyber Berry",d:"Blue raspberry and acai. Deep, juicy and a little futuristic.",c:"#4d9dff"},
+ {n:"Ghost Grapefruit",d:"Sparkling pink grapefruit. Dry, crisp and clean to the last sip.",c:"#ff6fa8"},
+ {n:"Zero-Point Mango",d:"Tropical mango and passionfruit. Smooth and sunny.",c:"#ffb020"}
+];
+var tabs=document.getElementById("tabs");
+function pick(i){
+  var f=F[i],r=document.documentElement.style;
+  r.setProperty("--acc",f.c);
+  document.getElementById("fname").textContent=f.n;
+  document.getElementById("fdesc").textContent=f.d;
+  document.getElementById("fsub").textContent=f.n;
+  [].forEach.call(tabs.children,function(b,j){b.setAttribute("aria-pressed",j===i)});
+}
+F.forEach(function(f,i){
+  var b=document.createElement("button");b.textContent=f.n;
+  b.onclick=function(){pick(i)};tabs.appendChild(b);
+});
+pick(0);
+(function(){
+var st=document.getElementById('stage'),cs=[].slice.call(st.querySelectorAll('.can')),busy=false,
+FL=[{n:'Voltage Citrus',c:'#d4ff2a'},{n:'Cyber Berry',c:'#4d9dff'},{n:'Ghost Grapefruit',c:'#ff6fa8'},{n:'Zero-Point Mango',c:'#ffb020'}],
+slot=[1,0,2],cur=[1,0,2];
+function sh(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function paint(){
+  cs.forEach(function(c,i){c.dataset.s=slot[i];c.style.setProperty('--acc',FL[cur[i]].c);c.querySelector('.sub').textContent=FL[cur[i]].n;c.style.setProperty('--r',[-12,3,12][i]+'deg')});
+  document.documentElement.style.setProperty('--acc',FL[cur[slot.indexOf(0)]].c);
+}
+var shs=cs.map(function(){var e=document.createElement('i');e.className='sh';st.appendChild(e);return e});
+function D(){return cs[0].offsetWidth*parseFloat(getComputedStyle(st).getPropertyValue('--sx'))}
+function X(s){return s===0?0:(s===1?-D():D())}
+function S(s){return s===0?1:.78}
+function TF(x,y,r,a,b){return 'translateX('+x+'px) translateY('+y+'px) rotate('+r+'deg) scale('+a+','+b+')'}
+function pads(){var w=cs[0].offsetWidth;shs.forEach(function(e,i){e.style.width=w*.95+'px';e.style.marginLeft=-w*.475+'px';e.style.transform='translateX('+X(slot[i])+'px) scale('+S(slot[i])+')';e.style.opacity=slot[i]===0?1:.5})}
+cs.forEach(function(c){if(!c.querySelector('.nad'))c.insertAdjacentHTML('beforeend','<div class="nad">NMN · CoQ10<br>355 ml</div>')});
+pads();window.addEventListener('resize',pads);
+function shuffle(){
+  if(busy)return;busy=true;
+  var prevS=slot.slice(),prev=cur[slot.indexOf(0)],ps,pf,n=0;
+  do{ps=sh([0,1,2]);pf=sh([0,1,2,3]).slice(0,3)}while((pf[ps.indexOf(0)]===prev||ps.join()===slot.join())&&++n<40);
+  slot=ps;
+  cs.forEach(function(c,i){c.dataset.s=slot[i]});
+  st.classList.add('anim');
+  pads();
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){cur=pf;paint();st.classList.remove('anim');busy=false;return}
+  var o={duration:1250,easing:'cubic-bezier(.4,0,.3,1)',fill:'backwards'};
+  cs.forEach(function(c,i){
+    var a=prevS[i],b=ps[i],xa=X(a),xb=X(b),sa=S(a),sb=S(b),dir=xb>xa?1:(xb<xa?-1:0),tilt=dir*14||8,
+    lift=a===b?34:Math.min(120,50+Math.abs(xb-xa)*.28),mx=(xa+xb)/2,ms=(sa+sb)/2*1.08,
+    opa=a===0?1:.65,opb=b===0?1:.65,fa=a===0?'none':'blur(1px)',fb=b===0?'none':'blur(1px)',
+    oa=a===0?1:.5,ob=b===0?1:.5,od=Object.assign({delay:i*80},o);
+    c.animate([
+      {offset:0,transform:TF(xa,0,0,sa,sa),opacity:opa,filter:fa,zIndex:a===0?3:1},
+      {offset:.12,transform:TF(xa,0,0,sa*1.05,sa*.93),opacity:opa,filter:fa,zIndex:a===0?3:1},
+      {offset:.45,transform:TF(mx,-lift,tilt,ms,ms),opacity:1,filter:'none',zIndex:4},
+      {offset:.82,transform:TF(xb,0,-tilt*.25,sb*1.05,sb*.93),opacity:opb,filter:fb,zIndex:b===0?3:1},
+      {offset:.92,transform:TF(xb,-5,tilt*.1,sb*.98,sb*1.02),opacity:opb,filter:fb,zIndex:b===0?3:1},
+      {offset:1,transform:TF(xb,0,0,sb,sb),opacity:opb,filter:fb,zIndex:b===0?3:1}
+    ],od);
+    shs[i].animate([
+      {offset:0,transform:'translateX('+xa+'px) scale('+sa+')',opacity:oa},
+      {offset:.12,transform:'translateX('+xa+'px) scale('+(sa*1.04)+')',opacity:oa},
+      {offset:.45,transform:'translateX('+mx+'px) scale('+(ms*.5)+')',opacity:.18},
+      {offset:.82,transform:'translateX('+xb+'px) scale('+(sb*1.08)+')',opacity:ob},
+      {offset:1,transform:'translateX('+xb+'px) scale('+sb+')',opacity:ob}
+    ],od);
+  });
+  setTimeout(function(){cur=pf;paint()},450);
+  setTimeout(function(){st.classList.remove('anim');busy=false},1250+160+80);
+}
+cs.forEach(function(c){c.addEventListener('animationend',function(){c.style.animation='none'})});
+paint();
+st.insertAdjacentHTML('beforebegin','<p class="hint">Tap the cans to shuffle</p>');
+st.onclick=shuffle;
+st.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();shuffle()}};
+})();
+if('IntersectionObserver' in window){
+  var cards=[].slice.call(document.querySelectorAll('.tile,.cols>div,.nums>div'));
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -6% 0px'});
+  cards.forEach(function(c){c.classList.add('rv');c.style.setProperty('--d',(([].indexOf.call(c.parentNode.children,c))%3)*.12+'s');io.observe(c)});
+  document.documentElement.classList.add('js');
+}
+</script>
+</body>
+</html>
